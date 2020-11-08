@@ -23,16 +23,16 @@
 
 - name: Create pyenv plugin install directories
   file:
-    path: "{{ pyenv_plugin_directory }}/{{ item }}"
+    path: "{{ pyenv_plugin_directory }}/{{ item.key }}"
     owner: "{{ pyenv_user }}"
     group: "{{ pyenv_group }}"
     mode: 0755
     state: directory
-  loop: "{{ pyenv_plugins }}"
+  with_dict: "{{ pyenv_plugins }}"
 
 - name: Install pyenv plugins
   git:
-    repo: "{{ pyenv_plugin_info[item]['source_uri'] }}"
-    version: "{{ pyenv_plugin_info[item]['version'] }}"
-    dest: "{{ pyenv_plugin_directory }}/{{ item }}"
-  loop: "{{ pyenv_plugins }}"
+    repo: "{{ item.value.source_uri }}"
+    version: "{{ item.value.version }}"
+    dest: "{{ pyenv_plugin_directory }}/{{ item.key }}"
+  with_dict: "{{ pyenv_plugins }}"
