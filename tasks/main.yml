@@ -1,0 +1,38 @@
+---
+- name: Get OS specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install requisite system packages
+  package:
+    name: "{{ pyenv_packages }}"
+    state: present
+
+- name: Create pyenv install directory
+  file:
+    path: "{{ pyenv_install_directory }}"
+    owner: "{{ pyenv_user }}"
+    group: "{{ pyenv_group }}"
+    mode: 0755
+    state: directory
+
+- name: Clone pyenv repo
+  git:
+    repo: "{{ pyenv_source_uri }}"
+    version: "{{ pyenv_version }}"
+    dest: "{{ pyenv_install_directory }}"
+
+- name: Create pyenv plugin install directories
+  file:
+    path: "{{ pyenv_plugin_directory }}/{{ item }}"
+    owner: "{{ pyenv_user }}"
+    group: "{{ pyenv_group }}"
+    mode: 0755
+    state: directory
+  loop: "{{ pyenv_plugins }}"
+
+- name: Install pyenv plugins
+  git:
+    repo: "{{ pyenv_plugin_info[item]['source_uri'] }}"
+    version: "{{ pyenv_plugin_info[item]['version'] }}"
+    dest: "{{ pyenv_plugin_directory }}/{{ item }}"
+  loop: "{{ pyenv_plugins }}"
