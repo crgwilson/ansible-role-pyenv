@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: crgwilson
+  role_name: pyenv
   description: Install pyenv on a target machine
   license: MIT
   min_ansible_version: 2.10
