@@ -4,6 +4,9 @@
   become: true
 
   vars:
+    pyenv_user: foouser
+    pyenv_group: foouser
+    pyenv_install_directory: /home/foouser/.pyenv
     pyenv_plugins:
       pyenv-virtualenv:
         source_uri: https://github.com/pyenv/pyenv-virtualenv.git
