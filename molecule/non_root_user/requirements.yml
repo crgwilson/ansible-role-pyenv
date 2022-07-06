@@ -1,0 +1,4 @@
+---
+- src: https://github.com/crgwilson/ansible-role-git
+  version: master
+  name: crgwilson.git

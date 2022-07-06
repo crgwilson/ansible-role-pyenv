@@ -8,7 +8,7 @@ pyenv_plugin_directory: "{{ pyenv_install_directory }}/plugins"
 pyenv_source_uri: https://github.com/pyenv/pyenv.git
 pyenv_version: v1.2.21
 
-pyenv_plugins:
-  pyenv-virtualenv:
-    source_uri: https://github.com/pyenv/pyenv-virtualenv.git
-    version: v1.1.5
+pyenv_plugins: {}
+# pyenv-virtualenv:
+#   source_uri: https://github.com/pyenv/pyenv-virtualenv.git
+#   version: v1.1.5

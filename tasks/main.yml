@@ -16,6 +16,8 @@
     state: directory
 
 - name: Clone pyenv repo
+  become: true
+  become_user: "{{ pyenv_user }}"
   git:
     repo: "{{ pyenv_source_uri }}"
     version: "{{ pyenv_version }}"
@@ -31,6 +33,8 @@
   with_dict: "{{ pyenv_plugins }}"
 
 - name: Install pyenv plugins
+  become: true
+  become_user: "{{ pyenv_user }}"
   git:
     repo: "{{ item.value.source_uri }}"
     version: "{{ item.value.version }}"
